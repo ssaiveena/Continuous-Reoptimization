@@ -4,7 +4,7 @@ This repository contains all code corresponding to methods and figure generation
 Dynamic re-optimization of reservoir policies as an adaptation to climate change
 
 ## Requirements
-[NumPy](https://numpy.org/), [Pandas](https://pandas.pydata.org/), [Matplotlib](https://matplotlib.org/), [Scipy](https://scipy.org/), [Scikit-learn](https://scikit-learn.org/stable/), [Seaborn](https://seaborn.pydata.org/), MPI for Python (optional).
+[NumPy](https://numpy.org/), [Pandas](https://pandas.pydata.org/), [Matplotlib](https://matplotlib.org/), [Scipy](https://scipy.org/), [Scikit-learn](https://scikit-learn.org/stable/), [Seaborn](https://seaborn.pydata.org/), numba, MPI for Python (optional).
 
 ## Directories
 
