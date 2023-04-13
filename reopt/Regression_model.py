@@ -35,7 +35,6 @@ def fitting(X, y, criterion, splitter, mdepth):
     # Predict class labels on a test data
     pred_labels_te = model.predict(X_test)
 
-
     text_representation = tree.export_text(model)
     print(text_representation)
 
@@ -47,7 +46,8 @@ def fitting(X, y, criterion, splitter, mdepth):
     print('No. of features: ', clf.n_features_in_)
     print('--------------------------------------------------------')
     print("")
-    
+    #################################################################
+    #The accuracy scores below are plotted in the supplementary material
     print('*************** Evaluation on Test Data ***************')
     score_te = model.score(X_test, y_test)
     print('Accuracy Score: ', score_te)
@@ -70,7 +70,6 @@ def fitting(X, y, criterion, splitter, mdepth):
                                 rounded=True, 
                                 #rotate=True,
                                ) 
-                               #class_names=[str(list(clf.classes_)[0]), str(list(clf.classes_)[1]), str(list(clf.classes_)[2])],
     graph = graphviz.Source(dot_data)
  
     # Return relevant data for chart plotting
@@ -103,10 +102,9 @@ def GetAnnualStatistics(DataDF):
 
     # define index as dates of ressmpled data.
     # data is resampled annually with end of year in September
-    #annualIndex = DataDF.resample('AS-OCT').mean().index
 
     # create empty dataframe
-    WYDataDF = pd.DataFrame(columns=colNames)#data=0, index=annualIndex, columns=colNames)
+    WYDataDF = pd.DataFrame(columns=colNames)
 
     # resample data
     WYData = DataDF#.resample('AS-OCT')
@@ -119,7 +117,6 @@ def GetAnnualStatistics(DataDF):
     WYDataDF['Coeff Var'] = WYData['Discharge'].std() / WYData['Discharge'].mean() * 100
     WYDataDF['Skew'] = WYData['Discharge'].skew()
     WYDataDF['Demand'] = WYData['demand'].mean()
-    print(WYDataDF)
     return (WYDataDF)
 
 def calculate_reliability(data, medians, k, df_demand=None):
@@ -131,14 +128,13 @@ def calculate_reliability(data, medians, k, df_demand=None):
     rel[rel > 1] = 1
     return rel
 
-train_params = json.load(open('data/params.json'))
-variables1 = json.load(open('data1.json'))
+variables1 = json.load(open('data/params.json'))
 medians = pd.read_csv('data/historical_medians.csv', index_col=0)
 
 cmip5_scenarios = pd.read_csv('data/cmip5/scenario_names.csv').name.to_list()
 lulc_scenarios = pd.read_csv('data/lulc/scenario_names.csv').name.to_list()
 res_keys = [k for k in variables1.keys()]
-f_comb = [20]
+f_comb = [1,2,5,10,15,20]
 w_comb = [5,10,15,20,30,50]
 
 
@@ -173,8 +169,7 @@ for f in f_comb:
                       for freq in range(w):
                         frames_w[i] = pd.concat([frames_w[i],splitdata[freq+(i-1)*f+1]])
                         frames_w_demand[i] = pd.concat([frames_w_demand[i],splitdata_demand[freq+(i-1)*f+1]])
-
-                    
+   
                     for i in range(1, num):
                         frames = pd.DataFrame()
                         df1 = frames_w[i]
@@ -184,8 +179,6 @@ for f in f_comb:
                         frames['demand'] = df_demand1['combined_demand'].values
                         data = GetAnnualStatistics(frames)
                         data['var1'] = variables[res_key[res]][0]
-                        #data['f'] = f
-                        #data['w'] = w
                         data_param = pd.concat([data_param, data])
 
                     data_rel = pd.read_csv('output/scenarios/Reoptimize/f_%d_w_%d/reopt_opt_historical_%s_%s_%d.csv.zip' %(f, w, cmip5, lulc, num-1),usecols=[res_key[res] + '_outflow_cfs','Unnamed: 0','dowy'])
