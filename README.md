@@ -4,11 +4,13 @@ This repository contains all code corresponding to methods and figure generation
 Dynamic re-optimization of reservoir policies as an adaptation to climate change
 
 ## Requirements
-[NumPy](https://numpy.org/), [Pandas](https://pandas.pydata.org/), [Matplotlib](https://matplotlib.org/), [Scipy](https://scipy.org/), [Scikit-learn](https://scikit-learn.org/stable/), [Seaborn](https://seaborn.pydata.org/), [Numba](https://numba.pydata.org/),  
+[NumPy](https://numpy.org/), [Pandas](https://pandas.pydata.org/), [Matplotlib](https://matplotlib.org/), [Scipy](https://scipy.org/), [Scikit-learn](https://scikit-learn.org/stable/), [Seaborn](https://seaborn.pydata.org/), [Numba](https://numba.pydata.org/),  [multiprocessing](https://docs.python.org/3/library/multiprocessing.html)
 
 ## Directories
 
-figure-scripts: Directory containing python scripts to generate **Figures 3-11**.
+``data``: 
+reopt: 
+figures: Directory containing python scripts to generate **Figures 3-11**.
 
 ## Paper methods, results and figures
 
