@@ -4,7 +4,6 @@ import pandas as pd
 import json
 import model
 from scipy.optimize import differential_evolution as DE
-from util import *
 import time
 from numba import njit
 import math
