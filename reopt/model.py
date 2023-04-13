@@ -1,14 +1,13 @@
 import numpy as np 
 import matplotlib.pyplot as plt
 from numba import njit
-from util import *
-
 '''
 SSJRB simulation model. Three parts:
 Reservoir releases, gains (into Delta), and Delta pumping
 Each component has two functions: step() and fit()
 Then all components are combined in the simulate() function
 Numba compilation requires only numpy arrays, no pandas objects
+#The focus is only on the reservoir releases in this study
 '''
 
 @njit
