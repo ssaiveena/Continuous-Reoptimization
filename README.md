@@ -26,6 +26,7 @@ Dynamic re-optimization of reservoir policies as an adaptation to climate change
 * Fits values for reservoir policies, gains, and delta pumping. Saved in `data/params.json`.
 * These reservoir policies are considered as simulated or baseline in the manuscript
 
-### Re-optimization: Reopt_main.py performs the policy search over the cmpi5 and lulc scenarios. The parameters of the rule curve are adapted by optimizing the reservoir performance based on the recently observed historical window (w) years of data and evaluating the performance of this policy during the following frequency of operation (f) years before the next re-optimization occurs.
+### Re-optimization: 
+* Reopt_main.py performs the policy search over the cmpi5 and lulc scenarios. The parameters of the rule curve are adapted by optimizing the reservoir performance based on the recently observed historical window (w) years of data and evaluating the performance of this policy during the following frequency of operation (f) years before the next re-optimization occurs.
 
 #### License: [MIT](LICENSE.md)
