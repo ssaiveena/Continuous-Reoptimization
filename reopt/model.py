@@ -9,6 +9,8 @@ Then all components are combined in the simulate() function
 Numba compilation requires only numpy arrays, no pandas objects
 #The focus is only on the reservoir releases in this study
 '''
+cfs_to_afd = 2.29568411 * 10 ** -5 * 86400
+afd_to_cfs = 1 / cfs_to_afd
 
 @njit
 def get_tocs(x, d):
@@ -212,6 +214,8 @@ def simulate(params, Kr, Kp, safecap, dowy, Q, Q_avg, R_avg, S_avg, Gains_avg, P
 
   '''  
   cfs_to_taf = 2.29568411 * 10 ** -5 * 86400 / 1000
+  cfs_to_afd = 2.29568411 * 10 ** -5 * 86400
+  afd_to_cfs = 1 / cfs_to_afd
 
   T,NR = Q.shape # timesteps, reservoirs
   NP = 2 # pumps

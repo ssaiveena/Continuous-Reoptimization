@@ -2,17 +2,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import json
-import model
+from reopt import model
 from scipy.optimize import differential_evolution as DE
 from util import *
 import time
 from numba import njit
 import math
-from setup_Future import reservoir_training_data
-from setup_Future import reservoir_training_data_updated
-from setup_Future import reservoir_fit
-from setup_Future import get_simulation_data
-from setup_Future import get_simulation_data_updated
+from reopt.setup_Future import reservoir_training_data
+from reopt.setup_Future import reservoir_training_data_updated
+from reopt.setup_Future import reservoir_fit
+from reopt.setup_Future import get_simulation_data
+from reopt.setup_Future import get_simulation_data_updated
 from multiprocessing import Pool
 import os
 
@@ -30,9 +30,10 @@ def water_day_up(d,year):
 def func(gridi,gridj,f,w,add_num):
     cmip5_scenarios = pd.read_csv('data/cmip5/scenario_names.csv').name.to_list()
     lulc_scenarios = pd.read_csv('data/lulc/scenario_names.csv').name.to_list()
-    filedir = 'output/scenarios/Reoptimize/f_' + str(f) + '_w_' + str(w) + '/'
+    filedir = 'output/scenarios/f_' + str(f) + '_w_' + str(w) + '/'
+    os.makedirs(filedir, exist_ok=True)
 
-# np.random.seed(1337)
+    # np.random.seed(1337)
     variables = json.load(open('data/nodes.json'))
     df = pd.read_csv('data/historical.csv', index_col=0, parse_dates=True)['10-01-1997':]
     medians = pd.read_csv('data/historical_medians.csv', index_col=0)
@@ -167,10 +168,12 @@ def parallel_product(list_a, list_b,f,w,add_num):
     p.map(product_helper, job_args)
 
 if __name__ == '__main__':
-    for f in f_comb:
-        for w in w_comb:
-            print(f,w)
-            parallel_product(exp_a, exp_b,f,w,get_add_num(f,w))
-
-    et  = time.time()
-    print(et-st)
+    func(0, 0, 15, 50, get_add_num(15, 50)) #this is an example to run for single test case
+    #the following is to run for all scenarios
+    # for f in f_comb:
+    #     for w in w_comb:
+    #         print(f,w)
+    #         parallel_product(exp_a, exp_b,f,w,get_add_num(f,w))
+    #
+    # et  = time.time()
+    # print(et-st)

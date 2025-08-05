@@ -2,11 +2,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import json
-import model
+# import model
+from reopt import model
 from scipy.optimize import differential_evolution as DE
 import time
 from numba import njit
 import math
+
+cfs_to_afd = 2.29568411*10**-5 * 86400
+afd_to_cfs = 1 / cfs_to_afd
 
 # functions to pull numpy arrays from dataframes
 
@@ -117,6 +121,7 @@ def reservoir_step(x, dowy, Q, S, K, R_avg, S_avg, tocs):
       tuple(float, float): the updated release (cfs) and storage (af)
 
   '''
+
     R_avg *= cfs_to_afd
     Q *= cfs_to_afd
 
